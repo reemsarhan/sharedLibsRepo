@@ -1,13 +1,11 @@
-def call(String repoDir, String imageTag) {
-    dir(repoDir) {
-        if (isUnix()) {
-            sh "docker build -t reemwaleed/new-deploymentnew-image:${imageTag} ."
-            sh "docker push reemwaleed/new-deploymentnew-image:${imageTag}"
-            sh "docker rmi -f reemwaleed/new-deploymentnew-image:${imageTag}"
-        } else {
-            bat "docker build -t reemwaleed/new-deploymentnew-image:${imageTag} ."
-            bat "docker push reemwaleed/new-deploymentnew-image:${imageTag}"
-            bat "docker rmi -f reemwaleed/new-deploymentnew-image:${imageTag}"
-        }
-    }
+// vars/dockerOperations.groovy
+
+def buildDockerImage(String contextPath, String tag) {
+    echo "Building Docker image with context: ${contextPath} and tag: ${tag}"
+    sh "docker build -t your-docker-repo/${contextPath}:${tag} ${contextPath}"
+}
+
+def pushDockerImage(String tag) {
+    echo "Pushing Docker image with tag: ${tag}"
+    sh "docker push your-docker-repo:${tag}"
 }
