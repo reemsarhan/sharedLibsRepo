@@ -1,4 +1,4 @@
-def buildAndPushDockerImage(String repoDir, String imageTag) {
+def call(String repoDir, String imageTag) {
     dir(repoDir) {
         if (isUnix()) {
             sh "docker build -t reemwaleed/new-deploymentnew-image:${imageTag} ."
