@@ -1,11 +1,14 @@
 // vars/dockerOperations.groovy
 
-def buildDockerImage(String contextPath, String tag) {
-    echo "Building Docker image with context: ${contextPath} and tag: ${tag}"
-    sh "docker build -t your-docker-repo/${contextPath}:${tag} ${contextPath}"
+def call(String repoName, String tag) {
+    // Default implementation can go here
 }
 
-def pushDockerImage(String tag) {
-    echo "Pushing Docker image with tag: ${tag}"
-    sh "docker push your-docker-repo:${tag}"
+def buildDockerImage(String repoName, String tag) {
+    sh "docker build -t ${repoName}:${tag} ."
 }
+
+def pushDockerImage(String repoName, String tag) {
+    sh "docker push ${repoName}:${tag}"
+}
+
