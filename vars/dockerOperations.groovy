@@ -1,14 +1,15 @@
 // vars/dockerOperations.groovy
 
-def call(String repoName, String tag) {
-    // Default implementation can go here
+ def call(String repoDir, String imageTag) {
+    dir(repoDir) {
+        if (isUnix()) {
+            sh "docker build -t reemwaleed/new-deploymentnew-image:${imageTag} ."
+            sh "docker push reemwaleed/new-deploymentnew-image:${imageTag}"
+            sh "docker rmi -f reemwaleed/new-deploymentnew-image:${imageTag}"
+        } else {
+            bat "docker build -t reemwaleed/new-deploymentnew-image:${imageTag} ."
+            bat "docker push reemwaleed/new-deploymentnew-image:${imageTag}"
+            bat "docker rmi -f reemwaleed/new-deploymentnew-image:${imageTag}"
+        }
+    }
 }
-
-def buildDockerImage(String repoName, String tag) {
-    sh "docker build -t ${repoName}:${tag} ."
-}
-
-def pushDockerImage(String repoName, String tag) {
-    sh "docker push ${repoName}:${tag}"
-}
-
